@@ -45,6 +45,8 @@ extern uint8_t __process6_stack_base__[], __process6_stack_size__[];
 
 /* chopstx does not expose generic GPIO interface */
 
+#ifndef MCU_STM32F1_GPIO_STRUCT_DEF
+#define MCU_STM32F1_GPIO_STRUCT_DEF
 struct GPIO {
   volatile uint32_t CRL;
   volatile uint32_t CRH;
@@ -54,6 +56,7 @@ struct GPIO {
   volatile uint32_t BRR;
   volatile uint32_t LCKR;
 };
+#endif
 
 #define GPIOA_BASE  (APB2PERIPH_BASE + 0x0800)
 #define GPIOA   ((struct GPIO *) GPIOA_BASE)
