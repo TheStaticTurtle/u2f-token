@@ -22,13 +22,6 @@ else ifeq ($(TARGET),ST_DONGLE)
 	DEFS     = -DUSE_SYS3 -DFREE_STANDING -DTARGET_ST_DONGLE -DHAVE_PUSH_BUTTON
 	LDSCRIPT = stm32f103.ld
 	BOARD    = $(CHOPSTX)/board/board-st-dongle.h
-else ifeq ($(TARGET),U2F_DONGLE)
-	MCU      = cortex-m3
-	CHIP     = stm32f103
-	DRIVERS  = pbt.c
-	DEFS     = -DUSE_SYS3 -DFREE_STANDING -DTARGET_U2F_DONGLE -DHAVE_PUSH_BUTTON
-	LDSCRIPT = stm32f103.ld
-	BOARD    = $(CHOPSTX)/board/board-u2f-dongle.h
 else ifeq ($(TARGET),ST_DONGLE_NO_PUSH)
 	MCU      = cortex-m3
 	CHIP     = stm32f103
@@ -58,6 +51,13 @@ else ifeq ($(TARGET),TOMU)
 	           -DHAVE_CAPSENSE -DTARGET_TOMU
 	LDSCRIPT = efm32hg.ld
 	BOARD    = $(CHOPSTX)/board/board-tomu.h
+else ifeq ($(TARGET),TURTLE_AUTH)
+	MCU      = cortex-m3
+	CHIP     = stm32f103
+	DRIVERS  = pbt.c
+	DEFS     = -DUSE_SYS3 -DFREE_STANDING -DTARGET_TURTLE_AUTH -DTURTLE_AUTH -DHAVE_PUSH_BUTTON
+	LDSCRIPT = stm32f103.ld
+	BOARD    = $(CHOPSTX)/board/board-turtle-auth.h
 endif
 
 ifeq ($(ENFORCE_DEBUG_LOCK),1)

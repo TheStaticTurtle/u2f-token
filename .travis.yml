@@ -21,7 +21,7 @@ script:
     cd src
     for ENFORCE_DEBUG_LOCK in 1 0 ; do
       for CUSTOM_ATTESTATION_CERT in 1 0 ; do
-        for TARGET in TOMU MAPLE_MINI BLUE_PILL BLACK_PILL ST_DONGLE ST_DONGLE_NO_PUSH ; do
+        for TARGET in TOMU MAPLE_MINI BLUE_PILL BLACK_PILL ST_DONGLE ST_DONGLE_NO_PUSH TURTLE_AUTH; do
           make TARGET=${TARGET} CUSTOM_ATTESTATION_CERT=${CUSTOM_ATTESTATION_CERT} ENFORCE_DEBUG_LOCK=${ENFORCE_DEBUG_LOCK} -j4
           if [ "${CUSTOM_ATTESTATION_CERT}" = 0 ] && [ "${ENFORCE_DEBUG_LOCK}" = 1 ] ; then
             cp build/u2f.bin ../artefacts/u2f-${TARGET}.bin
@@ -33,15 +33,3 @@ script:
       done
     done
     cd ..
-
-deploy:
-  provider: releases
-  api_key:
-    secure: L44PBDcHxpeG/HN2rIkAycRfRV0uiuyHIAxk/VWGyg7K/COMDl4Nhwjg2a+G/vMtH3CIgih+dxlG6auVI1kFJNgpQOsuhn8obl+QrF1+Vw+8zHIHVPCVook30Ar5ovYjV9EXHpA6lHucFOrNFrJ4BeT6NdDYjWVq+c7+9jgjtk3Hdoz1OfYbVLhbNRVwv/SqC8tyo0EjOqG0Fe13XXYDjUzNsFYZOP9Xu0Y94O64i8akrfNzwC4xZHFLpH5MHoF6nd/LJXxixsJ2C2OYJAcjI6ju8qwjGPWvIbIV52xyrXyM/nswGo/B7s7w/B4o2cqciJEll8fRqtJKeE3AWPc5L3hWz1ii6fb+5dAbgW+triwpNjLnX5PzJSsH1no6+3eXW5GmQnvS3cf/ht22JUvy5XnSnn3AHgJTuvmKXJfvE48ZWDaM4US+4z+dLLNRtxEEsTDHRNa96inkLVI60ZHIwACw90z0avnr0rvUdEYsx56oksCN1HcRr0tK3x2iBpqzBPGOYcTBENMnhMevRie88hjidj/ePRem4yxHHswZKmEwu5kL65atjTWN6ZrQQOqO9BH0NiFXfk9gOoWwRLhF090qoMI8n8u5R5iXz8wAMbQzH7/rntoCoNUy9bxLcclmzrk9lsxlhDp46xYfOHH/R9BRcOFKAEymt6B1k41chkE=
-  file_glob: true
-  file: artefacts/*
-  skip_cleanup: true
-  draft: true
-  on:
-    repo: gl-sergei/u2f-token
-    tags: true
